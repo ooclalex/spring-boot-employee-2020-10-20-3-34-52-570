@@ -1,18 +1,18 @@
 package com.thoughtworks.springbootemployee;
 
 public class Employee {
-    private int id;
+    private int employeeId;
     private String name;
     private int age;
     private int salary;
     private String gender;
 
-    public int getId() {
-        return id;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getName() {
@@ -51,8 +51,8 @@ public class Employee {
 
     }
 
-    public Employee(int id, String name, int age, int salary, String gender) {
-        this.id = id;
+    public Employee(int employeeId, String name, int age, int salary, String gender) {
+        this.employeeId = employeeId;
         this.name = name;
         this.age = age;
         this.salary = salary;

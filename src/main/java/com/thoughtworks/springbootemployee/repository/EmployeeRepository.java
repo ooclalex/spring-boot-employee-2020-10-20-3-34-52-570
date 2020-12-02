@@ -17,8 +17,8 @@ public class EmployeeRepository {
         return employeeRequest;
     }
 
-    public Employee update(Integer id, Employee employeeRequest) {
-        employees.stream().filter(employee -> id.equals(employee.getId())).findFirst().ifPresent(
+    public Employee update(Integer employeeId, Employee employeeRequest) {
+        employees.stream().filter(employee -> employeeId.equals(employee.getEmployeeId())).findFirst().ifPresent(
                 employee -> {
                     employees.remove(employee);
                     employees.add(employeeRequest);
@@ -27,8 +27,8 @@ public class EmployeeRepository {
         return employeeRequest;
     }
 
-    public void delete(Integer id) {
-        employees.stream().filter(employee -> id.equals(employee.getId())).findFirst().ifPresent(
+    public void delete(Integer employeeId) {
+        employees.stream().filter(employee -> employeeId.equals(employee.getEmployeeId())).findFirst().ifPresent(
                 employee -> employees.remove(employee)
         );
     }
@@ -41,7 +41,7 @@ public class EmployeeRepository {
 
     public Employee findSpecificEmployee(Integer employeeId) {
         return employees.stream()
-                .filter(employee -> employeeId.equals(employee.getId()))
+                .filter(employee -> employeeId.equals(employee.getEmployeeId()))
                 .findFirst()
                 .orElseThrow(NotFoundException::new);
     }

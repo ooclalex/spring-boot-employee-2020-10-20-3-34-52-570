@@ -62,13 +62,13 @@ class EmployeeServiceTest {
         when(employeeRepository.update(any(), any())).thenReturn(updatedEmployee);
 
         //when
-        employeeService.update(employee.getId(), employee);
+        employeeService.update(employee.getEmployeeId(), employee);
         final ArgumentCaptor<Employee> employeeArgumentCaptor = ArgumentCaptor.forClass(Employee.class);
         final ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
         verify(employeeRepository, times(1)).update(integerArgumentCaptor.capture(), employeeArgumentCaptor.capture());
 
         //then
-        final Employee actual = employeeService.update(employee.getId(), employee);
+        final Employee actual = employeeService.update(employee.getEmployeeId(), employee);
         assertEquals(999, actual.getSalary());
     }
 
@@ -78,10 +78,10 @@ class EmployeeServiceTest {
         final Employee employee = new Employee(1, "test", 18, 1000, "male");
 
         //when
-        employeeService.delete(employee.getId());
+        employeeService.delete(employee.getEmployeeId());
 
         //then
-        verify(employeeRepository, times(1)).delete(employee.getId());
+        verify(employeeRepository, times(1)).delete(employee.getEmployeeId());
     }
 
     @Test

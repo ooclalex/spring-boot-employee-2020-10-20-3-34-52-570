@@ -20,20 +20,20 @@ public class EmployeeService {
         return employeeRepository.create(employeeRequest);
     }
 
-    public Employee update(Integer id, Employee employeeRequest) {
-        return employeeRepository.update(id, employeeRequest);
+    public Employee update(Integer employeeId, Employee employeeRequest) {
+        return employeeRepository.update(employeeId, employeeRequest);
     }
 
-    public void delete(Integer id) {
-        employeeRepository.delete(id);
+    public void delete(Integer employeeId) {
+        employeeRepository.delete(employeeId);
     }
 
     public List<Employee> getByGender(String gender) {
         return employeeRepository.findByGender(gender);
     }
 
-    public Employee getSpecificEmployee(Integer id) {
-        return employeeRepository.findSpecificEmployee(id);
+    public Employee getSpecificEmployee(Integer employeeId) {
+        return employeeRepository.findSpecificEmployee(employeeId);
     }
 
     public List<Employee> getAllByPaging(Integer page, Integer pageSize) {

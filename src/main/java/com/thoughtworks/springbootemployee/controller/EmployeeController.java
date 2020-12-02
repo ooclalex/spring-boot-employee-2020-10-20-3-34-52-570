@@ -36,7 +36,7 @@ public class EmployeeController {
     @GetMapping("/{employeeId}")
     public Employee getSpecificEmployee(@PathVariable Integer employeeId) {
         return employees.stream()
-                .filter(employee -> employeeId.equals(employee.getId()))
+                .filter(employee -> employeeId.equals(employee.getEmployeeId()))
                 .findFirst()
                 .orElseThrow(NotFoundException::new);
     }
@@ -50,7 +50,7 @@ public class EmployeeController {
 
     @PutMapping("/{employeeId}")
     public Employee update(@PathVariable Integer employeeId, @RequestBody Employee employeeUpdate) {
-        employees.stream().filter(employee -> employeeId.equals(employee.getId())).findFirst().ifPresent(
+        employees.stream().filter(employee -> employeeId.equals(employee.getEmployeeId())).findFirst().ifPresent(
                 employee -> {
                     employees.remove(employee);
                     employees.add(employeeUpdate);
@@ -61,8 +61,6 @@ public class EmployeeController {
 
     @DeleteMapping("/{employeeId}")
     public void delete(@PathVariable Integer employeeId) {
-        employees.stream().filter(employee -> employeeId.equals(employee.getId())).findFirst().ifPresent(
-                employee -> employees.remove(employee)
-        );
+        employees.stream().filter(employee -> employeeId.equals(employee.getEmployeeId())).findFirst().ifPresent(employees::remove);
     }
 }
