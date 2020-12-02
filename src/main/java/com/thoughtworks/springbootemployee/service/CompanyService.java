@@ -8,13 +8,13 @@ import java.util.List;
 
 public class CompanyService {
     @Autowired
-    private final CompanyRepository companyRepository;
+    private CompanyRepository companyRepository;
     public CompanyService(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
 
 
     public List<Company> getAll() {
-        return null;
+        return companyRepository.findAll();
     }
 }

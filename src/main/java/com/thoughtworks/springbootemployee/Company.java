@@ -3,6 +3,7 @@ package com.thoughtworks.springbootemployee;
 import java.util.List;
 
 public class Company {
+    private int companyId;
     private String companyName;
     private int employeesNumber;
     private List<Employee> employees;
@@ -11,10 +12,15 @@ public class Company {
 
     }
 
-    public Company(String companyName, int employeesNumber, List<Employee> employees) {
+    public Company(int companyId, String companyName, int employeesNumber, List<Employee> employees) {
+        this.companyId = companyId;
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
         this.employees = employees;
+    }
+
+    public int getCompanyId() {
+        return this.companyId;
     }
 
     public String getCompanyName() {

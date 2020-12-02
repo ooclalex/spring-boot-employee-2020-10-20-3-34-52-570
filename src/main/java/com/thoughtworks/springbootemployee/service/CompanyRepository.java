@@ -2,11 +2,12 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.Company;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyRepository {
-    List<Company> companies;
+    private final List<Company> companies = new ArrayList<>();
     public List<Company> findAll() {
-        return null;
+        return this.companies;
     }
 }
