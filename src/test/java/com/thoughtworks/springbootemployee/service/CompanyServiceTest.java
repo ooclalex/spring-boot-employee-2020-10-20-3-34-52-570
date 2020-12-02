@@ -51,7 +51,7 @@ public class CompanyServiceTest {
         verify(companyRepository, times(1)).create(companyArgumentCaptor.capture());
 
         //then
-        final Employee actual = companyService.create(company);
-        assertEquals(1, actual.getId());
+        final Company actual = companyService.create(company);
+        assertEquals(1, actual.getCompanyId());
     }
 }

@@ -18,7 +18,7 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public Employee create(Company companyRequest) {
-        return null;
+    public Company create(Company companyRequest) {
+        return companyRepository.create(companyRequest);
     }
 }

@@ -12,6 +12,7 @@ public class CompanyRepository {
     }
 
     public Company create(Company companyRequest) {
-        return null;
+        companies.add(companyRequest);
+        return companyRequest;
     }
 }
