@@ -9,4 +9,8 @@ public class EmployeeRepository {
     public List<Employee> findAll() {
         return employee;
     }
+
+    public Employee create(Employee employeeRequest) {
+        return null;
+    }
 }
