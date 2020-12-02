@@ -24,4 +24,7 @@ public class EmployeeRepository {
         );
         return employeeRequest;
     }
+
+    public void delete(Integer id) {
+    }
 }

@@ -70,4 +70,16 @@ class EmployeeServiceTest {
 		final Employee actual = employeeService.update(employee.getId(), employee);
 		assertEquals(999, actual.getSalary());
 	}
+
+	@Test
+	void should_not_return_null_when_delete_employee_given_employee_id(){
+		//given
+		final Employee employee = new Employee(1, "test", 18, 1000, "male");
+
+		//when
+		employeeService.delete(employee.getId());
+
+		//then
+		verify(employeeRepository, times(1)).delete(employee.getId());
+	}
 }
