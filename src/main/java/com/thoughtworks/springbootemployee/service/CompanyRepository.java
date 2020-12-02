@@ -5,6 +5,7 @@ import com.thoughtworks.springbootemployee.exception.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CompanyRepository {
     private final List<Company> companies = new ArrayList<>();
@@ -39,6 +40,6 @@ public class CompanyRepository {
     }
 
     public List<Company> findAllByPaging(Integer page, Integer pageSize) {
-        return null;
+        return companies.stream().skip(pageSize * page).limit(pageSize).collect(Collectors.toList());
     }
 }

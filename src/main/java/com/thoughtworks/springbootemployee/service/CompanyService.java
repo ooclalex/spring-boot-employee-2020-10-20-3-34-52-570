@@ -35,6 +35,6 @@ public class CompanyService {
     }
 
     public List<Company> getAllByPaging(Integer page, Integer pageSize) {
-        return null;
+        return companyRepository.findAllByPaging(page, pageSize);
     }
 }
