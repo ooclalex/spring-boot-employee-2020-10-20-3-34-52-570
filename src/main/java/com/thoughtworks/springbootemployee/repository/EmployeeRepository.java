@@ -5,13 +5,13 @@ import com.thoughtworks.springbootemployee.Employee;
 import java.util.List;
 
 public class EmployeeRepository {
-    List<Employee> employee;
+    List<Employee> employees;
     public List<Employee> findAll() {
-        return employee;
+        return employees;
     }
 
     public Employee create(Employee employeeRequest) {
-        employee.add(employeeRequest);
+        employees.add(employeeRequest);
         return employeeRequest;
     }
 }
