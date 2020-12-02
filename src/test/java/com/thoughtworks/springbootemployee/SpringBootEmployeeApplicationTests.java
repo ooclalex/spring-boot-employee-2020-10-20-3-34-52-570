@@ -8,11 +8,12 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class SpringBootEmployeeApplicationTests {
@@ -22,7 +23,7 @@ class SpringBootEmployeeApplicationTests {
 		//given
 		EmployeeRepository employeeRepository = Mockito.mock(EmployeeRepository.class);
 		EmployeeService employeeService = new EmployeeService(employeeRepository);
-		final List<Employee> expected = Arrays.asList(new Employee(1, "test", 18, 1000, "male"));
+		final List<Employee> expected = Collections.singletonList(new Employee(1, "test", 18, 1000, "male"));
 
 		when(employeeRepository.findAll()).thenReturn(expected);
 
@@ -39,15 +40,15 @@ class SpringBootEmployeeApplicationTests {
 		EmployeeRepository employeeRepository = Mockito.mock(EmployeeRepository.class);
 		EmployeeService employeeService = new EmployeeService(employeeRepository);
 		final Employee employee = new Employee(1, "test", 18, 1000, "male");
-
-		when(employeeRepository.create(employee)).thenReturn(employee);
-		final ArgumentCaptor<Employee> employeeArgumentCaptor = ArgumentCaptor.forClass(Employee.class);
-		final Employee argument = verify(employeeRepository).create(employeeArgumentCaptor.capture());
+		when(employeeRepository.create(any())).thenReturn(employee);
 
 		//when
-		final Employee actual = employeeService.create(employee);
+		employeeService.create(employee);
+		final ArgumentCaptor<Employee> employeeArgumentCaptor = ArgumentCaptor.forClass(Employee.class);
+		verify(employeeRepository, times(1)).create(employeeArgumentCaptor.capture());
 
 		//then
-		assertEquals(employee, actual);
+		final Employee actual = employeeService.create(employee);
+		assertEquals(18, actual.getAge());
 	}
 }
