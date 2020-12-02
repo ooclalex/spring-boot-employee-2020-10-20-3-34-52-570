@@ -73,7 +73,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_not_return_null_when_delete_employee_given_employee_id() {
+    void should_not_return_when_delete_employee_given_employee_id() {
         //given
         final Employee employee = new Employee(1, "test", 18, 1000, "male");
 

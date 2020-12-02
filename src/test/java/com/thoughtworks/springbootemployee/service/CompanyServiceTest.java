@@ -71,4 +71,16 @@ public class CompanyServiceTest {
         final Company actual = companyService.update(company.getCompanyId(), company);
         assertEquals("Orange", actual.getCompanyName());
     }
+
+    @Test
+    void should_not_return_when_delete_company_given_company_id() {
+        //given
+        final Company company = new Company(1, "Apple", 1000, new ArrayList<>());
+
+        //when
+        companyService.delete(company.getCompanyId());
+
+        //then
+        verify(companyRepository, times(1)).delete(company.getCompanyId());
+    }
 }

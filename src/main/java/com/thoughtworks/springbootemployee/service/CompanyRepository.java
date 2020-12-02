@@ -25,4 +25,7 @@ public class CompanyRepository {
         );
         return companyRequest;
     }
+
+    public void delete(int companyId) {
+    }
 }
