@@ -14,4 +14,8 @@ public class EmployeeRepository {
         employees.add(employeeRequest);
         return employeeRequest;
     }
+
+    public Employee update(Employee any) {
+        return null;
+    }
 }

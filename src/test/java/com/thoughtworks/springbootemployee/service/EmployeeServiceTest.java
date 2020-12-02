@@ -52,4 +52,21 @@ class EmployeeServiceTest {
 		final Employee actual = employeeService.create(employee);
 		assertEquals(18, actual.getAge());
 	}
+
+	@Test
+	void should_return_updated_employee_when_update_employee_given_employee_id(){
+		//given
+		final Employee employee = new Employee(1, "test", 18, 1000, "male");
+		final Employee updatedEmployee = new Employee(1, "test", 18, 999, "male");
+		when(employeeRepository.update(any())).thenReturn(updatedEmployee);
+
+		//when
+		employeeService.update(employee.getId(), employee);
+		final ArgumentCaptor<Employee> employeeArgumentCaptor = ArgumentCaptor.forClass(Employee.class);
+		verify(employeeRepository, times(1)).update(employeeArgumentCaptor.capture());
+
+		//then
+		final Employee actual = employeeService.update(employee.getId(), employee);
+		assertEquals(999, actual.getSalary());
+	}
 }
