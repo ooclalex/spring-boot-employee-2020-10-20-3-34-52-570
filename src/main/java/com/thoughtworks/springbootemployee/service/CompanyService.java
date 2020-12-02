@@ -22,7 +22,7 @@ public class CompanyService {
         return companyRepository.create(companyRequest);
     }
 
-    public Company update(int companyId, Company company) {
-        return null;
+    public Company update(int companyId, Company companyRequest) {
+        return companyRepository.update(companyId, companyRequest);
     }
 }
