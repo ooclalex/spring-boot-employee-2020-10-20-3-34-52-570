@@ -1,7 +1,9 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.Company;
+import com.thoughtworks.springbootemployee.Employee;
 import com.thoughtworks.springbootemployee.exception.NotFoundException;
+import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,7 +36,6 @@ public class CompanyController {
                 .orElseThrow(NotFoundException::new);
     }
 
-
     @PostMapping
     public Company create(@RequestBody Company companyUpdate) {
         companies.add(companyUpdate);
@@ -55,5 +56,11 @@ public class CompanyController {
     @DeleteMapping("/{companyId}")
     public void delete(@PathVariable Integer companyId) {
         companies.stream().filter(company -> companyId.equals(company.getCompanyId())).findFirst().ifPresent(companies::remove);
+    }
+
+    @PostMapping("/{companyId}/employees")
+    public List<Employee> getEmployeesUnderCompany(@PathVariable Integer companyId) {
+        CompanyRepository companyRepository = new CompanyRepository();
+        return companyRepository.getEmployeesUnderCompany(companyId);
     }
 }

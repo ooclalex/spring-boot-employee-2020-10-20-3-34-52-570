@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 public class CompanyRepository {
     private final List<Company> companies = new ArrayList<>();
 
+    public CompanyRepository() {
+
+    }
+
     public List<Company> findAll() {
         return this.companies;
     }
