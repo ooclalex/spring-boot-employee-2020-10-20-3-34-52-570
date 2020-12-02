@@ -33,7 +33,7 @@ public class EmployeeService {
     }
 
     public Employee getSpecificEmployee(Integer id) {
-        return employeeRepository.findSpecficEmployee(id);
+        return employeeRepository.findSpecificEmployee(id);
     }
 
     public List<Employee> getAllByPaging(Integer page, Integer pageSize) {

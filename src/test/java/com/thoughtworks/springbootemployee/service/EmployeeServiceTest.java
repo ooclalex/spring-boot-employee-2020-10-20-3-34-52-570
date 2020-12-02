@@ -111,7 +111,7 @@ class EmployeeServiceTest {
         final Integer id = 1;
         final Employee expected = new Employee(1, "test", 18, 1000, "male");
 
-        when(employeeRepository.findSpecficEmployee(any())).thenReturn(expected);
+        when(employeeRepository.findSpecificEmployee(any())).thenReturn(expected);
 
         //when
         final Employee actual = employeeService.getSpecificEmployee(id);

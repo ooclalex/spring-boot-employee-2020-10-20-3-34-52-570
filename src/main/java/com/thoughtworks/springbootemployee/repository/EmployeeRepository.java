@@ -39,7 +39,7 @@ public class EmployeeRepository {
                 .collect(Collectors.toList());
     }
 
-    public Employee findSpecficEmployee(Integer employeeId) {
+    public Employee findSpecificEmployee(Integer employeeId) {
         return employees.stream()
                 .filter(employee -> employeeId.equals(employee.getId()))
                 .findFirst()
