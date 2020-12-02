@@ -26,5 +26,12 @@ public class EmployeeRepository {
     }
 
     public void delete(Integer id) {
+        employees.stream().filter(employee -> id.equals(employee.getId())).findFirst().ifPresent(
+                employee -> employees.remove(employee)
+        );
+    }
+
+    public List<Employee> findByGender() {
+        return null;
     }
 }

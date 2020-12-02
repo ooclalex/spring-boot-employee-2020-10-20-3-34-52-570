@@ -24,6 +24,11 @@ public class EmployeeService {
         return employeeRepository.update(id, employeeRequest);
     }
 
-    public void delete(int id) {
+    public void delete(Integer id) {
+        employeeRepository.delete(id);
+    }
+
+    public List<Employee> getByGender() {
+        return null;
     }
 }
