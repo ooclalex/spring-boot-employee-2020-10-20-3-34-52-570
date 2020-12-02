@@ -20,7 +20,7 @@ public class EmployeeService {
         return employeeRepository.create(employeeRequest);
     }
 
-    public Employee update(int id, Employee employeeRequest) {
-        return null;
+    public Employee update(Integer id, Employee employeeRequest) {
+        return employeeRepository.update(id, employeeRequest);
     }
 }

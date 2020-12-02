@@ -58,12 +58,13 @@ class EmployeeServiceTest {
 		//given
 		final Employee employee = new Employee(1, "test", 18, 1000, "male");
 		final Employee updatedEmployee = new Employee(1, "test", 18, 999, "male");
-		when(employeeRepository.update(any())).thenReturn(updatedEmployee);
+		when(employeeRepository.update(any(), any())).thenReturn(updatedEmployee);
 
 		//when
 		employeeService.update(employee.getId(), employee);
 		final ArgumentCaptor<Employee> employeeArgumentCaptor = ArgumentCaptor.forClass(Employee.class);
-		verify(employeeRepository, times(1)).update(employeeArgumentCaptor.capture());
+		final ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+		verify(employeeRepository, times(1)).update(integerArgumentCaptor.capture(), employeeArgumentCaptor.capture());
 
 		//then
 		final Employee actual = employeeService.update(employee.getId(), employee);
