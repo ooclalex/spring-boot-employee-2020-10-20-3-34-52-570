@@ -37,4 +37,8 @@ public class CompanyRepository {
                 .findFirst()
                 .orElseThrow(NotFoundException::new);
     }
+
+    public List<Company> findAllByPaging(Integer page, Integer pageSize) {
+        return null;
+    }
 }

@@ -98,4 +98,19 @@ public class CompanyServiceTest {
         //then
         assertEquals(expected, actual);
     }
+
+    @Test
+    void should_return_companies_when_get_all_by_paging_given_all_companies_page_and_page_size() {
+        //given
+        final Integer page = 1, pageSize = 1;
+        final List<Company> expected = Collections.singletonList(new Company(1, "Apple", 1000, new ArrayList<>()));
+
+        when(companyRepository.findAllByPaging(page, pageSize)).thenReturn(expected);
+
+        //when
+        final List<Company> actual = companyService.getAllByPaging(page, pageSize);
+
+        //then
+        assertEquals(expected, actual);
+    }
 }

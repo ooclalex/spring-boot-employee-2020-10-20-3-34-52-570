@@ -33,4 +33,8 @@ public class CompanyService {
     public Company getSpecificCompany(Integer companyId) {
         return companyRepository.findSpecificCompany(companyId);
     }
+
+    public List<Company> getAllByPaging(Integer page, Integer pageSize) {
+        return null;
+    }
 }
