@@ -9,9 +9,11 @@ import java.util.List;
 public class EmployeeService {
     @Autowired
     private final EmployeeRepository employeeRepository;
-    public EmployeeService(EmployeeRepository employeeRepository){
+
+    public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
+
     public List<Employee> getAll() {
         return employeeRepository.findAll();
     }

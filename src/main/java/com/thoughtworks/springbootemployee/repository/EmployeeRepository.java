@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class EmployeeRepository {
     List<Employee> employees;
+
     public List<Employee> findAll() {
         return employees;
     }
