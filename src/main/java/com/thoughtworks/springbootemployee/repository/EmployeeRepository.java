@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.repository;
 
 import com.thoughtworks.springbootemployee.Employee;
+import com.thoughtworks.springbootemployee.exception.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +39,10 @@ public class EmployeeRepository {
                 .collect(Collectors.toList());
     }
 
-    public List<Employee> findSpecficEmployee(Integer id) {
-        return null;
+    public Employee findSpecficEmployee(Integer employeeId) {
+        return employees.stream()
+                .filter(employee -> employeeId.equals(employee.getId()))
+                .findFirst()
+                .orElseThrow(NotFoundException::new);
     }
 }

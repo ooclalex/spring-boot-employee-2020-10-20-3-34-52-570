@@ -109,12 +109,12 @@ class EmployeeServiceTest {
     void should_return_specific_employees_when_get_specific_employee_given_all_employees_and_id() {
         //given
         final Integer id = 1;
-        final List<Employee> expected = Collections.singletonList(new Employee(1, "test", 18, 1000, "male"));
+        final Employee expected = new Employee(1, "test", 18, 1000, "male");
 
         when(employeeRepository.findSpecficEmployee(any())).thenReturn(expected);
 
         //when
-        final List<Employee> actual = employeeService.getSpecificEmployee(id);
+        final Employee actual = employeeService.getSpecificEmployee(id);
 
         //then
         assertEquals(expected, actual);

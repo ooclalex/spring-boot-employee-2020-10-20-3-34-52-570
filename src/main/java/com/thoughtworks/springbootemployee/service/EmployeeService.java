@@ -32,7 +32,7 @@ public class EmployeeService {
         return employeeRepository.findByGender(gender);
     }
 
-    public List<Employee> getSpecificEmployee(Integer id) {
-        return null;
+    public Employee getSpecificEmployee(Integer id) {
+        return employeeRepository.findSpecficEmployee(id);
     }
 }
