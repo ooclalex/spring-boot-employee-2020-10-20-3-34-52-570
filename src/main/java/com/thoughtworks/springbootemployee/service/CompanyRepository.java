@@ -45,6 +45,6 @@ public class CompanyRepository {
     }
 
     public List<Employee> getEmployeesUnderCompany(int companyId) {
-        return null;
+        return findSpecificCompany(companyId).getEmployees();
     }
 }
