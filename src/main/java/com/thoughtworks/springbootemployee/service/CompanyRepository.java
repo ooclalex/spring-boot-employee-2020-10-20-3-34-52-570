@@ -10,4 +10,8 @@ public class CompanyRepository {
     public List<Company> findAll() {
         return this.companies;
     }
+
+    public Company create(Company companyRequest) {
+        return null;
+    }
 }

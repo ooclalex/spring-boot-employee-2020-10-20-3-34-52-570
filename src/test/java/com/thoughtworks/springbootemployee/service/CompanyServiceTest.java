@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.Employee;
 import com.thoughtworks.springbootemployee.Company;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -14,7 +15,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CompanyServiceTest {
@@ -37,4 +39,19 @@ public class CompanyServiceTest {
         assertEquals(expected, companies);
     }
 
+    @Test
+    void should_return_created_company_when_create_company_given_no_company_company_request() {
+        //given
+        final Company company = new Company(1, "Apple", 1000, new ArrayList<>());
+        when(companyRepository.create(any())).thenReturn(company);
+
+        //when
+        companyService.create(company);
+        final ArgumentCaptor<Company> companyArgumentCaptor = ArgumentCaptor.forClass(Company.class);
+        verify(companyRepository, times(1)).create(companyArgumentCaptor.capture());
+
+        //then
+        final Employee actual = companyService.create(company);
+        assertEquals(1, actual.getId());
+    }
 }
