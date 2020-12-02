@@ -26,6 +26,7 @@ public class CompanyRepository {
         return companyRequest;
     }
 
-    public void delete(int companyId) {
+    public void delete(Integer companyId) {
+        companies.stream().filter(company -> companyId.equals(company.getCompanyId())).findFirst().ifPresent(companies::remove);
     }
 }
