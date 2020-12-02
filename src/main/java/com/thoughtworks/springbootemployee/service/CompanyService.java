@@ -29,4 +29,8 @@ public class CompanyService {
     public void delete(int companyId) {
         companyRepository.delete(companyId);
     }
+
+    public Company getSpecificCompany(Integer companyId) {
+        return null;
+    }
 }

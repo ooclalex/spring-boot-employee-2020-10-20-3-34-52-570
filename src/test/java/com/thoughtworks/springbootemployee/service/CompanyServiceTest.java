@@ -83,4 +83,19 @@ public class CompanyServiceTest {
         //then
         verify(companyRepository, times(1)).delete(company.getCompanyId());
     }
+
+    @Test
+    void should_return_specific_companies_when_get_specific_company_given_all_companies_and_id() {
+        //given
+        final Integer id = 1;
+        final Company expected = new Company(1, "Apple", 1000, new ArrayList<>());
+
+        when(companyRepository.findSpecificCompany(any())).thenReturn(expected);
+
+        //when
+        final Company actual = companyService.getSpecificCompany(id);
+
+        //then
+        assertEquals(expected, actual);
+    }
 }
