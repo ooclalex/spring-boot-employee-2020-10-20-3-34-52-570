@@ -3,6 +3,7 @@ package com.thoughtworks.springbootemployee.repository;
 import com.thoughtworks.springbootemployee.Employee;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeRepository {
     List<Employee> employees;
@@ -31,7 +32,9 @@ public class EmployeeRepository {
         );
     }
 
-    public List<Employee> findByGender() {
-        return null;
+    public List<Employee> findByGender(String gender) {
+        return employees.stream()
+                .filter(employee -> employee.getGender().equals(gender))
+                .collect(Collectors.toList());
     }
 }

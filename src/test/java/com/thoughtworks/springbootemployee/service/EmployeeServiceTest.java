@@ -96,10 +96,10 @@ class EmployeeServiceTest {
         List<Employee> expected = new ArrayList<>();
         expected.add(employee1);
 
-        when(employeeRepository.findByGender()).thenReturn(expected);
+        when(employeeRepository.findByGender(any())).thenReturn(expected);
 
         //when
-        final List<Employee> actual = employeeService.getByGender();
+        final List<Employee> actual = employeeService.getByGender(gender);
 
         //then
         assertEquals(expected, actual);

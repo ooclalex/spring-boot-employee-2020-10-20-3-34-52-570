@@ -28,7 +28,7 @@ public class EmployeeService {
         employeeRepository.delete(id);
     }
 
-    public List<Employee> getByGender() {
-        return null;
+    public List<Employee> getByGender(String gender) {
+        return employeeRepository.findByGender(gender);
     }
 }
