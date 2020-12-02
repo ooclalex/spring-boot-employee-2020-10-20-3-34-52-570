@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.Company;
+import com.thoughtworks.springbootemployee.Employee;
 import com.thoughtworks.springbootemployee.exception.NotFoundException;
 
 import java.util.ArrayList;
@@ -41,5 +42,9 @@ public class CompanyRepository {
 
     public List<Company> findAllByPaging(Integer page, Integer pageSize) {
         return companies.stream().skip(pageSize * page).limit(pageSize).collect(Collectors.toList());
+    }
+
+    public List<Employee> getEmployeesUnderCompany(int companyId) {
+        return null;
     }
 }

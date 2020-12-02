@@ -113,4 +113,19 @@ public class CompanyServiceTest {
         //then
         assertEquals(expected, actual);
     }
+
+    @Test
+    void should_return_employee_list_when_get_company_employee_given_company_id_and_companies() {
+        //given
+        final Employee employee = new Employee(1, "test", 18, 1000, "male");
+        final Company company = new Company(1, "Apple", 1000, Collections.singletonList(employee));
+        final List<Employee> expected = Collections.singletonList(employee);
+        when(companyRepository.getEmployeesUnderCompany(company.getCompanyId())).thenReturn(expected);
+
+        //when
+        List<Employee> actual = companyService.getEmployeesUnderCompany(company.getCompanyId());
+
+        //then
+        assertEquals(expected, actual);
+    }
 }
