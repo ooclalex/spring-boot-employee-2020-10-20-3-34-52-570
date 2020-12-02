@@ -1,5 +1,6 @@
-package com.thoughtworks.springbootemployee;
+package com.thoughtworks.springbootemployee.service;
 
+import com.thoughtworks.springbootemployee.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class SpringBootEmployeeApplicationTests {
+class EmployeeServiceTest {
 
 	@Test
 	void should_return_all_employees_when_get_all_given_all_employees() {
