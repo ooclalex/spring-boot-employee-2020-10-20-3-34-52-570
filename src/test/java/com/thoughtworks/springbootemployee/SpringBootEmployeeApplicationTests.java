@@ -18,8 +18,8 @@ class SpringBootEmployeeApplicationTests {
 	@Test
 	void should_return_all_employees_when_get_all_given_all_employees() {
 		//given
-		EmployeeService employeeService = new EmployeeService();
 		EmployeeRepository employeeRepository = Mockito.mock(EmployeeRepository.class);
+		EmployeeService employeeService = new EmployeeService(employeeRepository);
 		final List<Employee> expected = Arrays.asList(new Employee(1, "test", 18, 1000, "male"));
 
 		when(employeeRepository.findAll()).thenReturn(expected);
