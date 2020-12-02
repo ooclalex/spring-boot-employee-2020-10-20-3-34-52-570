@@ -1,6 +1,9 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.Employee;
+import com.thoughtworks.springbootemployee.exception.NotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,6 +18,16 @@ public class EmployeeController {
     public List<Employee> getAll() {
         return employees;
     }
+
+
+    @GetMapping("/{employeeId}")
+    public Employee getSpecificEmployee(@PathVariable Integer employeeId) {
+        return employees.stream()
+                .filter(employee -> employeeId.equals(employee.getId()))
+                .findFirst()
+                .orElseThrow(NotFoundException::new);
+    }
+
 
     @PostMapping
     public Employee create(@RequestBody Employee employeeUpdate) {
