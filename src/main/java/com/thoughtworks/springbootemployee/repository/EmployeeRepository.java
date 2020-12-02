@@ -45,4 +45,8 @@ public class EmployeeRepository {
                 .findFirst()
                 .orElseThrow(NotFoundException::new);
     }
+
+    public List<Employee> findAllByPaging(Integer page, Integer pageSize) {
+        return null;
+    }
 }

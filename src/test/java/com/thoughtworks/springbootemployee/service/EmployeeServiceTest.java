@@ -119,4 +119,19 @@ class EmployeeServiceTest {
         //then
         assertEquals(expected, actual);
     }
+
+    @Test
+    void should_return_employees_when_get_all_by_paging_given_all_employees_page_and_page_size() {
+        //given
+        final Integer page = 1, pageSize = 1;
+        final List<Employee> expected = Collections.singletonList(new Employee(1, "test", 18, 1000, "male"));
+
+        when(employeeRepository.findAllByPaging(page, pageSize)).thenReturn(expected);
+
+        //when
+        final List<Employee> actual = employeeService.getAllByPaging(page, pageSize);
+
+        //then
+        assertEquals(expected, actual);
+    }
 }

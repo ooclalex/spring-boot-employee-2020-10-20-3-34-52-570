@@ -35,4 +35,8 @@ public class EmployeeService {
     public Employee getSpecificEmployee(Integer id) {
         return employeeRepository.findSpecficEmployee(id);
     }
+
+    public List<Employee> getAllByPaging(Integer page, Integer pageSize) {
+        return null;
+    }
 }
