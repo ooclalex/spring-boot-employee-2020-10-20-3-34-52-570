@@ -37,6 +37,6 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllByPaging(Integer page, Integer pageSize) {
-        return null;
+        return employeeRepository.findAllByPaging(page, pageSize);
     }
 }
