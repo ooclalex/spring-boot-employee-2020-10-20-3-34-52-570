@@ -17,13 +17,14 @@ public class EmployeeController {
 
     @GetMapping
     @ResponseBody
-    public List<Employee> getAll(@RequestParam(required = false) String gender) {
-        if(gender == null){
-            return employees;
+    public List<Employee> getAll(@RequestParam(required = false) String gender, Integer page, Integer pageSize) {
+        if(gender != null) {
+            return employees.stream()
+                    .filter(employee -> employee.getGender().equals(gender))
+                    .collect(Collectors.toList());
         }
-        return employees.stream()
-                .filter(employee -> employee.getGender().equals(gender))
-                .collect(Collectors.toList());
+
+        return employees;
     }
 
     @GetMapping("/{employeeId}")
