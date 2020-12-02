@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.Company;
+import com.thoughtworks.springbootemployee.exception.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,9 @@ public class CompanyRepository {
     }
 
     public Company findSpecificCompany(Integer companyId) {
-        return null;
+        return companies.stream()
+                .filter(employee -> companyId.equals(employee.getCompanyId()))
+                .findFirst()
+                .orElseThrow(NotFoundException::new);
     }
 }

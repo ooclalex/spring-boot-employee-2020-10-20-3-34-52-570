@@ -31,6 +31,6 @@ public class CompanyService {
     }
 
     public Company getSpecificCompany(Integer companyId) {
-        return null;
+        return companyRepository.findSpecificCompany(companyId);
     }
 }
