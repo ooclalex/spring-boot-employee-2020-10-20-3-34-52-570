@@ -85,7 +85,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_return_male_employees_when_get_all_by_gender_given_all_employees_and_male_gender() {
+    void should_return_male_employees_when_get_all_by_gender_given_all_employees_and_gender() {
         //given
         final String gender = "male";
         Employee employee1 = new Employee(1, "Alex", 18, 1000, "male");
@@ -100,6 +100,21 @@ class EmployeeServiceTest {
 
         //when
         final List<Employee> actual = employeeService.getByGender(gender);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void should_return_specific_employees_when_get_specific_employee_given_all_employees_and_id() {
+        //given
+        final Integer id = 1;
+        final List<Employee> expected = Collections.singletonList(new Employee(1, "test", 18, 1000, "male"));
+
+        when(employeeRepository.findSpecficEmployee(any())).thenReturn(expected);
+
+        //when
+        final List<Employee> actual = employeeService.getSpecificEmployee(id);
 
         //then
         assertEquals(expected, actual);

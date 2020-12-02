@@ -37,4 +37,8 @@ public class EmployeeRepository {
                 .filter(employee -> employee.getGender().equals(gender))
                 .collect(Collectors.toList());
     }
+
+    public List<Employee> findSpecficEmployee(Integer id) {
+        return null;
+    }
 }

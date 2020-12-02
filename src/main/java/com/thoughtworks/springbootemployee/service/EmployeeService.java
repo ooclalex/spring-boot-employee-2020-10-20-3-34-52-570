@@ -31,4 +31,8 @@ public class EmployeeService {
     public List<Employee> getByGender(String gender) {
         return employeeRepository.findByGender(gender);
     }
+
+    public List<Employee> getSpecificEmployee(Integer id) {
+        return null;
+    }
 }
