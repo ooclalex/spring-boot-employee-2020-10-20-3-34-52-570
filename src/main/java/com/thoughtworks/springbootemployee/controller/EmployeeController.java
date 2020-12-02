@@ -18,10 +18,23 @@ public class EmployeeController {
     @GetMapping
     @ResponseBody
     public List<Employee> getAll(@RequestParam(required = false) String gender, Integer page, Integer pageSize) {
-        if(gender != null) {
+        if (gender != null) {
             return employees.stream()
                     .filter(employee -> employee.getGender().equals(gender))
                     .collect(Collectors.toList());
+        }
+
+        if (page != null && pageSize != null) {
+            int listStartAt = (page - 1) * pageSize;
+            int listEndAt = (page - 1) * pageSize + pageSize;
+            if (page < 1 || listStartAt > employees.size()) {
+                throw new NotFoundException();
+            }
+            if (listEndAt > employees.size()) {
+                listEndAt = employees.size();
+            }
+
+            return employees.subList(listStartAt, listEndAt);
         }
 
         return employees;
