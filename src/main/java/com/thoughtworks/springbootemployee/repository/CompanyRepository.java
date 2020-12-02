@@ -1,4 +1,4 @@
-package com.thoughtworks.springbootemployee.service;
+package com.thoughtworks.springbootemployee.repository;
 
 import com.thoughtworks.springbootemployee.Company;
 import com.thoughtworks.springbootemployee.Employee;

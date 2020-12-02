@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.Company;
 import com.thoughtworks.springbootemployee.Employee;
+import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
