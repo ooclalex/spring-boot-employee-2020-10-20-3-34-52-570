@@ -16,28 +16,23 @@ public class EmployeeController {
     private List<Employee> employees = new ArrayList<>();
 
     @GetMapping
-    @ResponseBody
-    public List<Employee> getAll(@RequestParam(required = false) String gender, Integer page, Integer pageSize) {
-        if (gender != null) {
-            return employees.stream()
-                    .filter(employee -> employee.getGender().equals(gender))
-                    .collect(Collectors.toList());
-        }
-
-        if (page != null && pageSize != null) {
-            int listStartAt = (page - 1) * pageSize;
-            int listEndAt = (page - 1) * pageSize + pageSize;
-            if (page < 1 || listStartAt > employees.size()) {
-                throw new NotFoundException();
-            }
-            if (listEndAt > employees.size()) {
-                listEndAt = employees.size();
-            }
-
-            return employees.subList(listStartAt, listEndAt);
-        }
-
+    public List<Employee> getAll() {
         return employees;
+    }
+
+    @GetMapping(params = {"page", "pageSize"})
+    public List<Employee> getAllByPaging(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer pageSize
+    ) {
+        return employees.stream().skip(pageSize * page).limit(pageSize).collect(Collectors.toList());
+    }
+
+    @GetMapping(params = {"gender"})
+    public List<Employee> getAllByGender(@RequestParam(required = false) String gender) {
+        return employees.stream()
+                .filter(employee -> employee.getGender().equals(gender))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{employeeId}")
