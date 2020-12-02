@@ -21,4 +21,8 @@ public class CompanyService {
     public Company create(Company companyRequest) {
         return companyRepository.create(companyRequest);
     }
+
+    public Company update(int companyId, Company company) {
+        return null;
+    }
 }

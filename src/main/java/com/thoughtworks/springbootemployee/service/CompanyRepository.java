@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.Company;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentMap;
 
 public class CompanyRepository {
     private final List<Company> companies = new ArrayList<>();
@@ -14,5 +15,9 @@ public class CompanyRepository {
     public Company create(Company companyRequest) {
         companies.add(companyRequest);
         return companyRequest;
+    }
+
+    public Company update(Integer companyId, Company companyRequest) {
+        return null;
     }
 }

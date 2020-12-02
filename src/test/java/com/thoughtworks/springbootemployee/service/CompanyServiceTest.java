@@ -7,7 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -53,5 +52,23 @@ public class CompanyServiceTest {
         //then
         final Company actual = companyService.create(company);
         assertEquals(1, actual.getCompanyId());
+    }
+
+    @Test
+    void should_return_updated_company_when_update_company_given_company_id() {
+        //given
+        final Company company = new Company(1, "Apple", 1000, new ArrayList<>());
+        final Company updatedCompany = new Company(1, "Orange", 1000, new ArrayList<>());
+        when(companyRepository.update(any(), any())).thenReturn(updatedCompany);
+
+        //when
+        companyService.update(company.getCompanyId(), company);
+        final ArgumentCaptor<Company> companyArgumentCaptor = ArgumentCaptor.forClass(Company.class);
+        final ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(companyRepository, times(1)).update(integerArgumentCaptor.capture(), companyArgumentCaptor.capture());
+
+        //then
+        final Company actual = companyService.update(company.getCompanyId(), company);
+        assertEquals("Orange", actual.getCompanyName());
     }
 }
