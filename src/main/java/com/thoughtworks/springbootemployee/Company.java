@@ -1,13 +1,15 @@
 package com.thoughtworks.springbootemployee;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
 
+@Document
 public class Company {
     @MongoId(FieldType.OBJECT_ID)
-    private Integer companyId;
+    private String companyId;
     private String companyName;
     private Integer employeesNumber;
     private List<Employee> employees;
@@ -16,14 +18,14 @@ public class Company {
 
     }
 
-    public Company(Integer companyId, String companyName, Integer employeesNumber, List<Employee> employees) {
+    public Company(String companyId, String companyName, Integer employeesNumber, List<Employee> employees) {
         this.companyId = companyId;
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
         this.employees = employees;
     }
 
-    public Integer getCompanyId() {
+    public String getCompanyId() {
         return this.companyId;
     }
 
@@ -37,5 +39,9 @@ public class Company {
 
     public List<Employee> getEmployees() {
         return employees;
+    }
+
+    public void setId(String companyId) {
+        this.companyId = companyId;
     }
 }

@@ -24,7 +24,7 @@ public class EmployeeService {
     }
 
     public Employee update(String id, Employee employeeRequest) {
-        if(getSpecificEmployee(id) != null){
+        if(getSpecificEmployee(id) != null) {
             employeeRequest.setId(id);
             return employeeRepository.save(employeeRequest);
         }

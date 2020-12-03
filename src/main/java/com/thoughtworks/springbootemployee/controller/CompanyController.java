@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.Company;
 import com.thoughtworks.springbootemployee.Employee;
 import com.thoughtworks.springbootemployee.exception.NotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -59,8 +60,8 @@ public class CompanyController {
     }
 
     @PostMapping("/{companyId}/employees")
-    public List<Employee> getEmployeesUnderCompany(@PathVariable Integer companyId) {
-        CompanyRepository companyRepository = new CompanyRepository();
-        return companyRepository.getEmployeesUnderCompany(companyId);
+    public List<Employee> getEmployeesUnderCompany(@PathVariable String companyId) {
+        CompanyService companyService = new CompanyService();
+        return companyService.getEmployeesUnderCompany(companyId);
     }
 }
