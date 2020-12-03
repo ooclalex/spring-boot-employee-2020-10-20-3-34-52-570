@@ -54,6 +54,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{employeeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable String employeeId) {
         employeeService.delete(employeeId);
     }

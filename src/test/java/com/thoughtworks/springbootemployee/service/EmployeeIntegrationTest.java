@@ -10,9 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -92,5 +90,16 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$.age").value(18))
                 .andExpect(jsonPath("$.salary").value(1000))
                 .andExpect(jsonPath("$.gender").value("Male"));
+    }
+
+    @Test
+    public void should_not_return_when_delete_employee_given_employee_id() throws Exception {
+        //given
+        Employee employee = employeeRepository.save(new Employee("Alex", 18, 100, "Male"));
+
+        //when
+        //then
+        mockMvc.perform(delete("/employees/" + employee.getId()))
+                .andExpect(status().isNoContent());
     }
 }
