@@ -5,6 +5,7 @@ import com.thoughtworks.springbootemployee.exception.NotFoundException;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class EmployeeController {
 
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Employee create(@RequestBody Employee employeeUpdate) {
         return employeeService.create(employeeUpdate);
     }
