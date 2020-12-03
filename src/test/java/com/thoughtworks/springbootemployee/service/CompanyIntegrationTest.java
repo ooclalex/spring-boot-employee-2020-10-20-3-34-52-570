@@ -89,4 +89,15 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$.employeesNumber").value(100))
                 .andExpect(jsonPath("$.employees").value(new ArrayList<>()));
     }
+
+    @Test
+    public void should_not_return_when_delete_company_given_company_id() throws Exception {
+        //given
+        Company company = companyRepository.save(new Company("Apple", 1000, new ArrayList<>()));
+
+        //when
+        //then
+        mockMvc.perform(delete("/companies/" + company.getId()))
+                .andExpect(status().isNoContent());
+    }
 }
