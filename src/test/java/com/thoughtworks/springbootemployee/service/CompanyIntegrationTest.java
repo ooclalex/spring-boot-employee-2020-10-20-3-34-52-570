@@ -100,4 +100,19 @@ public class CompanyIntegrationTest {
         mockMvc.perform(delete("/companies/" + company.getId()))
                 .andExpect(status().isNoContent());
     }
+
+    @Test
+    void should_return_specific_companies_when_get_specific_company_given_all_companies_and_id() throws Exception{
+        //given
+        Company company = companyRepository.save(new Company("Apple", 1000, new ArrayList<>()));
+
+        //when, then
+        mockMvc.perform(get("/companies/" + company.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isString())
+                .andExpect(jsonPath("$.id").isString())
+                .andExpect(jsonPath("$.companyName").value("Apple"))
+                .andExpect(jsonPath("$.employeesNumber").value(1000))
+                .andExpect(jsonPath("$.employees").value(new ArrayList<>()));
+    }
 }
