@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -110,9 +111,42 @@ public class CompanyIntegrationTest {
         mockMvc.perform(get("/companies/" + company.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isString())
-                .andExpect(jsonPath("$.id").isString())
                 .andExpect(jsonPath("$.companyName").value("Apple"))
                 .andExpect(jsonPath("$.employeesNumber").value(1000))
                 .andExpect(jsonPath("$.employees").value(new ArrayList<>()));
+    }
+
+    @Test
+    void should_return_companies_when_get_all_by_paging_given_all_companies_page_and_page_size() throws Exception{
+        //given
+        final int page = 0, pageSize = 1;
+        Company company1 = companyRepository.save(new Company("Apple", 1000, new ArrayList<>()));
+        Company company2 = companyRepository.save(new Company("Orange", 100, new ArrayList<>()));
+
+        //when
+        //then
+        mockMvc.perform(get("/companies?page=" + page + "&pageSize=" + pageSize))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").isString())
+                .andExpect(jsonPath("$[0].companyName").value("Apple"))
+                .andExpect(jsonPath("$[0].employeesNumber").value(1000))
+                .andExpect(jsonPath("$[0].employees").value(new ArrayList<>()));
+    }
+
+    @Test
+        void should_return_employee_list_when_get_company_employee_given_company_id_and_companies() throws Exception {
+        //given
+        final Employee employee = new Employee("test", 18, 1000, "Male");
+        final Company company = new Company("Apple", 1000, Collections.singletonList(employee));
+        companyRepository.save(company);
+
+        //when
+        //then
+        mockMvc.perform(get("/companies/" + company.getId() + "/employees"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name").value("test"))
+                .andExpect(jsonPath("$[0].age").value(18))
+                .andExpect(jsonPath("$[0].salary").value(1000))
+                .andExpect(jsonPath("$[0].gender").value("Male"));
     }
 }

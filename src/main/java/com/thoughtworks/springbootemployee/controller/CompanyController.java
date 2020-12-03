@@ -52,7 +52,7 @@ public class CompanyController {
         companyService.delete(companyId);
     }
 
-    @PostMapping("/{companyId}/employees")
+    @GetMapping("/{companyId}/employees")
     public List<Employee> getEmployeesUnderCompany(@PathVariable String companyId) {
         return companyService.getEmployeesUnderCompany(companyId);
     }
