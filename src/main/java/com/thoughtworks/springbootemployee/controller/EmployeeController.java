@@ -41,7 +41,6 @@ public class EmployeeController {
         return employeeService.getSpecificEmployee(employeeId);
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Employee create(@RequestBody Employee employeeUpdate) {
