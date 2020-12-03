@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -114,9 +115,7 @@ public class EmployeeIntegrationTest {
         //given
         final String gender = "Male";
         Employee employee1 = employeeRepository.save(new Employee("Alex", 18, 1000, "Male"));
-        Employee employee2 = employeeRepository.save(new Employee("Alice", 18, 1000, "feMale"));
-
-
+        Employee employee2 = employeeRepository.save(new Employee("Alice", 18, 1000, "Female"));
 
         //when
         //then
@@ -128,4 +127,20 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$[0].salary").value(1000))
                 .andExpect(jsonPath("$[0].gender").value("Male"));
     }
+
+    @Test
+    void should_return_specific_employees_when_get_specific_employee_given_all_employees_and_id() throws Exception{
+        //given
+        Employee employee1 = employeeRepository.save(new Employee("Alex", 18, 1000, "Male"));
+
+        //when, then
+        mockMvc.perform(get("/employees/" + employee1.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isString())
+                .andExpect(jsonPath("$.name").value("Alex"))
+                .andExpect(jsonPath("$.age").value(18))
+                .andExpect(jsonPath("$.salary").value(1000))
+                .andExpect(jsonPath("$.gender").value("Male"));
+    }
+
 }
