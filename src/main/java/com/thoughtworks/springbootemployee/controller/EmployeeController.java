@@ -24,7 +24,7 @@ public class EmployeeController {
     }
 
     @GetMapping(params = {"page", "pageSize"})
-    public Page<Employee> getAllByPaging(
+    public List<Employee> getAllByPaging(
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer pageSize
     ) {

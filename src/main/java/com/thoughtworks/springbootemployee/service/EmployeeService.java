@@ -40,7 +40,7 @@ public class EmployeeService {
         return employeeRepository.findById(employeeId).orElseThrow(NotFoundException::new);
     }
 
-    public Page<Employee> getAllByPaging(Integer page, Integer pageSize) {
-        return employeeRepository.findAll(PageRequest.of(page, pageSize));
+    public List<Employee> getAllByPaging(Integer page, Integer pageSize) {
+        return employeeRepository.findAll(PageRequest.of(page, pageSize)).getContent();
     }
 }

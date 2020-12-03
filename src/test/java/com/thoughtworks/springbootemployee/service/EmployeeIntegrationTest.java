@@ -7,10 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -143,4 +147,21 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$.gender").value("Male"));
     }
 
+    @Test
+    void should_return_employees_when_get_all_by_paging_given_all_employees_page_and_page_size() throws Exception{
+        //given
+        final int page = 0, pageSize = 1;
+        Employee employee1 = employeeRepository.save(new Employee("Alex", 18, 1000, "Male"));
+        Employee employee2 = employeeRepository.save(new Employee("Alice", 18, 1000, "Female"));
+
+        //when
+        //then
+        mockMvc.perform(get("/employees?page=" + page + "&pageSize=" + pageSize))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").isString())
+                .andExpect(jsonPath("$[0].name").value("Alex"))
+                .andExpect(jsonPath("$[0].age").value(18))
+                .andExpect(jsonPath("$[0].salary").value(1000))
+                .andExpect(jsonPath("$[0].gender").value("Male"));
+    }
 }
