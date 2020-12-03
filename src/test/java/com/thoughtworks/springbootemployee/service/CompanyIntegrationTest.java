@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -44,5 +46,26 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$[0].companyName").value("Apple"))
                 .andExpect(jsonPath("$[0].employeesNumber").value(1000))
                 .andExpect(jsonPath("$[0].employees").value(new ArrayList<>()));
+    }
+
+    @Test
+    public void should_return_company_when_create_company_given_company() throws Exception {
+        //given
+        String companyAsJson = "    {\n" +
+                "        \"companyName\": \"Apple\",\n" +
+                "        \"employeesNumber\": 1000,\n" +
+                "        \"employees\": []\n" +
+                "    }";
+
+        //when
+        //then
+        mockMvc.perform(post("/companies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(companyAsJson))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isString())
+                .andExpect(jsonPath("$.companyName").value("Apple"))
+                .andExpect(jsonPath("$.employeesNumber").value(1000))
+                .andExpect(jsonPath("$.employees").value(new ArrayList<>()));
     }
 }

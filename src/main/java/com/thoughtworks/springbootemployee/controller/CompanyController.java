@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.Company;
 import com.thoughtworks.springbootemployee.Employee;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class CompanyController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Company create(@RequestBody Company companyUpdate) {
         return companyService.create(companyUpdate);
     }
