@@ -10,6 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -101,5 +107,25 @@ public class EmployeeIntegrationTest {
         //then
         mockMvc.perform(delete("/employees/" + employee.getId()))
                 .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void should_return_Male_employees_when_get_all_by_gender_given_all_employees_and_gender() throws Exception{
+        //given
+        final String gender = "Male";
+        Employee employee1 = employeeRepository.save(new Employee("Alex", 18, 1000, "Male"));
+        Employee employee2 = employeeRepository.save(new Employee("Alice", 18, 1000, "feMale"));
+
+
+
+        //when
+        //then
+        mockMvc.perform(get("/employees?gender=" + gender))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").isString())
+                .andExpect(jsonPath("$[0].name").value("Alex"))
+                .andExpect(jsonPath("$[0].age").value(18))
+                .andExpect(jsonPath("$[0].salary").value(1000))
+                .andExpect(jsonPath("$[0].gender").value("Male"));
     }
 }
