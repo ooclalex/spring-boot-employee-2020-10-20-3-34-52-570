@@ -61,18 +61,16 @@ class EmployeeRepositoryTest {
 //    @Test
 //    void should_return_updated_employee_when_update_employee_given_employee_id() {
 //        //given
-//        final Employee employee = new Employee("1", "test", 18, 1000, "male");
-//        final Employee updatedEmployee = new Employee("1", "test", 18, 999, "male");
-//        when(employeeRepository.findAllById(any()).save()).thenReturn(updatedEmployee);
+//        Employee employee = new Employee("test", 18, 1000, "male");
+//        employee.setId("1");
+//        final Employee updatedEmployee = new Employee("test", 18, 999, "male");
+//        when(employeeRepository.findById("1")).thenReturn(java.util.Optional.of(updatedEmployee));
+//        when(employeeRepository.save(updatedEmployee)).thenReturn(updatedEmployee);
 //
 //        //when
-//        employeeService.update(employee.getEmployeeId(), employee);
-//        final ArgumentCaptor<Employee> employeeArgumentCaptor = ArgumentCaptor.forClass(Employee.class);
-//        final ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
-//        verify(employeeRepository, times(1)).findAllById(stringArgumentCaptor.capture()).save();
+//        final Employee actual = employeeService.update(employee.getId(), employee);
 //
 //        //then
-//        final Employee actual = employeeService.update(employee.getEmployeeId(), employee);
 //        assertEquals(999, actual.getSalary());
 //    }
 
