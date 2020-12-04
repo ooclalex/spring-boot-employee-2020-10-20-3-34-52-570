@@ -24,10 +24,12 @@ public class EmployeeService {
     }
 
     public Employee update(String id, Employee employeeRequest) {
+        // todo existsById
         if(getSpecificEmployee(id) != null) {
             employeeRequest.setId(id);
             return employeeRepository.save(employeeRequest);
         }
+        // todo throw notfoundexception
         return null;
     }
 

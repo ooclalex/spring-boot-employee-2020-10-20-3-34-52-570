@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+// todo: this should be called EmployeeServiceTest
 @ExtendWith(MockitoExtension.class)
 class EmployeeRepositoryTest {
     @InjectMocks
@@ -113,7 +114,7 @@ class EmployeeRepositoryTest {
         final String id = "1";
         final Employee expected = new Employee("test", 18, 1000, "male");
 
-        when(employeeRepository.findById(any())).thenReturn(Optional.of(expected));
+        when(employeeRepository.findById(id)).thenReturn(Optional.of(expected));
 
         //when
         final Employee actual = employeeService.getSpecificEmployee(id);

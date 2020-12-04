@@ -9,8 +9,8 @@ public class Employee {
     @MongoId(FieldType.OBJECT_ID)
     private String id;
     private String name;
-    private int age;
-    private int salary;
+    private Integer age;
+    private Integer salary;
     private String gender;
 
     public String getId() {

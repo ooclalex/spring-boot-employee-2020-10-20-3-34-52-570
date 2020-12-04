@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -104,7 +105,7 @@ public class EmployeeIntegrationTest {
     }
 
     @Test
-    void should_return_Male_employees_when_get_all_by_gender_given_all_employees_and_gender() throws Exception{
+    void should_return_male_employees_when_get_all_by_gender_given_all_employees_and_gender() throws Exception{
         //given
         final String gender = "Male";
         Employee employee1 = employeeRepository.save(new Employee("Alex", 18, 1000, "Male"));
@@ -114,11 +115,8 @@ public class EmployeeIntegrationTest {
         //then
         mockMvc.perform(get("/employees?gender=" + gender))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").isString())
-                .andExpect(jsonPath("$[0].name").value("Alex"))
-                .andExpect(jsonPath("$[0].age").value(18))
-                .andExpect(jsonPath("$[0].salary").value(1000))
-                .andExpect(jsonPath("$[0].gender").value("Male"));
+                .andExpect(jsonPath("$.*", hasSize(1)))
+                .andExpect(jsonPath("$[*].gender").value("Male"));
     }
 
     @Test
@@ -147,6 +145,7 @@ public class EmployeeIntegrationTest {
         //then
         mockMvc.perform(get("/employees?page=" + page + "&pageSize=" + pageSize))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.*", hasSize(1)))
                 .andExpect(jsonPath("$[0].id").isString())
                 .andExpect(jsonPath("$[0].name").value("Alex"))
                 .andExpect(jsonPath("$[0].age").value(18))

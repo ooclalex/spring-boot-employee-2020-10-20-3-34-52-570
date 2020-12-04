@@ -25,6 +25,7 @@ public class CompanyService {
     }
 
     public Company update(String companyId, Company companyRequest) {
+        //todo check employeeservice update
         if(getSpecificCompany(companyId) != null) {
             companyRequest.setId(companyId);
             return companyRepository.save(companyRequest);

@@ -12,6 +12,7 @@ public class Company {
     private String id;
     private String companyName;
     private Integer employeesNumber;
+    //todo list of ids
     private List<Employee> employees;
 
     public Company() {
