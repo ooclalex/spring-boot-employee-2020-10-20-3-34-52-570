@@ -25,12 +25,11 @@ public class CompanyService {
     }
 
     public Company update(String companyId, Company companyRequest) {
-        //todo check employeeservice update
-        if(getSpecificCompany(companyId) != null) {
+        if (companyRepository.existsById(companyId)) {
             companyRequest.setId(companyId);
             return companyRepository.save(companyRequest);
         }
-        return null;
+        throw new NotFoundException();
     }
 
     public void delete(String companyId) {

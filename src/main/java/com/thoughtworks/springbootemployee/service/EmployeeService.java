@@ -4,7 +4,6 @@ import com.thoughtworks.springbootemployee.Employee;
 import com.thoughtworks.springbootemployee.exception.NotFoundException;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +23,11 @@ public class EmployeeService {
     }
 
     public Employee update(String id, Employee employeeRequest) {
-        // todo existsById
-        if(getSpecificEmployee(id) != null) {
+        if (employeeRepository.existsById(id)) {
             employeeRequest.setId(id);
             return employeeRepository.save(employeeRequest);
         }
-        // todo throw notfoundexception
-        return null;
+        throw new NotFoundException();
     }
 
     public void delete(String employeeId) {
