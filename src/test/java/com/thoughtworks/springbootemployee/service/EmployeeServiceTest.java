@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -58,21 +59,19 @@ class EmployeeServiceTest {
         assertEquals(18, actual.getAge());
     }
 
-//    @Test
-//    void should_return_updated_employee_when_update_employee_given_employee_id() {
-//        //given
-//        Employee employee = new Employee("test", 18, 1000, "male");
-//        employee.setId("1");
-//        final Employee updatedEmployee = new Employee("test", 18, 999, "male");
-//        when(employeeRepository.findById("1")).thenReturn(java.util.Optional.of(updatedEmployee));
-//        when(employeeRepository.save(updatedEmployee)).thenReturn(updatedEmployee);
-//
-//        //when
-//        final Employee actual = employeeService.update(employee.getId(), employee);
-//
-//        //then
-//        assertEquals(999, actual.getSalary());
-//    }
+    @Test
+    void should_return_updated_employee_when_update_employee_given_employee_id() {
+        //given
+        final Employee updatedEmployee = new Employee("test", 18, 999, "male");
+        when(employeeRepository.existsById("1")).thenReturn(true);
+        when(employeeRepository.save(updatedEmployee)).thenReturn(updatedEmployee);
+
+        //when
+        final Employee actual = employeeService.update("1", updatedEmployee);
+
+        //then
+        assertEquals(999, actual.getSalary());
+    }
 
     @Test
     void should_not_return_when_delete_employee_given_employee_id() {
@@ -122,18 +121,18 @@ class EmployeeServiceTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    void should_return_employees_when_get_all_by_paging_given_all_employees_page_and_page_size() {
-//        //given
-//        final int page = 1, pageSize = 1;
-//        List<Employee> expected = (Collections.singletonList(new Employee("test", 18, 1000, "male")));
-//
-//        when(employeeRepository.findAll(PageRequest.of(page, pageSize))).thenReturn(expected);
-//
-//        //when
-//        final List<Employee> actual = employeeService.getAllByPaging(page, pageSize);
-//
-//        //then
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    void should_return_employees_when_get_all_by_paging_given_all_employees_page_and_page_size() {
+        //given
+        final int page = 1, pageSize = 1;
+        Page<Employee> expected = new PageImpl<>((Collections.singletonList(new Employee("test", 18, 1000, "male"))));
+
+        when(employeeRepository.findAll(PageRequest.of(page, pageSize))).thenReturn(expected);
+
+        //when
+        final List<Employee> actual = employeeService.getAllByPaging(page, pageSize);
+
+        //then
+        assertEquals(expected.toList(), actual);
+    }
 }

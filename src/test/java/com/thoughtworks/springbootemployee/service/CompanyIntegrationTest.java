@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -137,16 +138,13 @@ public class CompanyIntegrationTest {
         void should_return_employee_list_when_get_company_employee_given_company_id_and_companies() throws Exception {
         //given
         final Employee employee = new Employee("test", 18, 1000, "Male");
-        final Company company = new Company("Apple", 1000, Collections.singletonList(employee));
+        final Company company = new Company("Apple", 1000, Collections.singletonList(employee.getId()));
         companyRepository.save(company);
 
         //when
         //then
         mockMvc.perform(get("/companies/" + company.getId() + "/employees"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value("test"))
-                .andExpect(jsonPath("$[0].age").value(18))
-                .andExpect(jsonPath("$[0].salary").value(1000))
-                .andExpect(jsonPath("$[0].gender").value("Male"));
+                .andExpect(jsonPath("$.*", hasSize(1)));
     }
 }

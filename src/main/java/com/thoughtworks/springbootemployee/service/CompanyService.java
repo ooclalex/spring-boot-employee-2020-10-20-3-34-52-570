@@ -44,7 +44,7 @@ public class CompanyService {
         return companyRepository.findAll(PageRequest.of(page, pageSize)).getContent();
     }
 
-    public List<Employee> getEmployeesUnderCompany(String companyId) {
+    public List<String> getEmployeesUnderCompany(String companyId) {
         return this.getSpecificCompany(companyId).getEmployees();
     }
 }

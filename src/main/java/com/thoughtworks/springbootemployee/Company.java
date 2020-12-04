@@ -13,13 +13,13 @@ public class Company {
     private String companyName;
     private Integer employeesNumber;
     //todo list of ids
-    private List<Employee> employees;
+    private List<String> employees;
 
     public Company() {
 
     }
 
-    public Company(String companyName, Integer employeesNumber, List<Employee> employees) {
+    public Company(String companyName, Integer employeesNumber, List<String> employees) {
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
         this.employees = employees;
@@ -37,7 +37,7 @@ public class Company {
         return employeesNumber;
     }
 
-    public List<Employee> getEmployees() {
+    public List<String> getEmployees() {
         return employees;
     }
 

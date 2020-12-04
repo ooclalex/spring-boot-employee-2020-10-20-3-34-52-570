@@ -53,7 +53,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{companyId}/employees")
-    public List<Employee> getEmployeesUnderCompany(@PathVariable String companyId) {
+    public List<String> getEmployeesUnderCompany(@PathVariable String companyId) {
         return companyService.getEmployeesUnderCompany(companyId);
     }
 }
